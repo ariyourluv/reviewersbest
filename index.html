@@ -3,870 +3,321 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Article Title — ReviewersBest</title>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>ReviewersBest — Top Product Reviews & Buying Guides</title>
 <style>
-  /* ── Reset & base ── */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --ink:      #0f0e0c;
-    --paper:    #f5f2eb;
-    --paper2:   #ede9df;
-    --accent:   #c8441a;
-    --green:    #2a5c3f;
-    --green-lt: #5DCAA5;
-    --nav:      #1a2e1a;
-    --muted:    #7a7568;
-    --border:   #d4cfc4;
-    --serif:    'Instrument Serif', Georgia, serif;
-    --mono:     'DM Mono', monospace;
-    --sans:     'DM Sans', sans-serif;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: var(--sans);
-    background: #fff;
-    color: var(--ink);
-    -webkit-font-smoothing: antialiased;
-    font-size: 16px;
-    line-height: 1.7;
-  }
-
-  /* ── Site header ── */
-  .site-header {
-    background: var(--nav);
-    padding: 0 32px;
-    display: flex;
-    align-items: center;
-    height: 52px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-
-  .site-logo {
-    font-family: var(--sans);
-    font-size: 16px;
-    font-weight: 500;
-    color: #b8dfc9;
-    text-decoration: none;
-    letter-spacing: -0.3px;
-  }
-
-  .site-logo span { color: var(--green-lt); }
-
-  .header-tag {
-    margin-left: auto;
-    font-family: var(--mono);
-    font-size: 10px;
-    color: rgba(255,255,255,0.35);
-    letter-spacing: 0.3px;
-  }
-
-  /* ── Layout ── */
-  .page-wrap {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 0 24px;
-    display: grid;
-    grid-template-columns: 1fr 280px;
-    gap: 48px;
-    padding-top: 40px;
-    padding-bottom: 60px;
-    align-items: start;
-  }
-
-  /* ── Article main ── */
-  .article-main { min-width: 0; }
-
-  /* breadcrumb */
-  .breadcrumb {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 0.4px;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .breadcrumb a { color: var(--green); text-decoration: none; }
-  .breadcrumb a:hover { text-decoration: underline; }
-  .breadcrumb .sep { color: var(--border); }
-
-  /* category pill */
-  .cat-pill {
-    display: inline-block;
-    font-family: var(--mono);
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    padding: 3px 10px;
-    background: #e8f2ec;
-    color: var(--green);
-    border-radius: 2px;
-    margin-bottom: 12px;
-  }
-
-  /* H1 */
-  h1.article-title {
-    font-family: var(--serif);
-    font-size: 38px;
-    font-weight: 400;
-    line-height: 1.13;
-    letter-spacing: -0.5px;
-    color: var(--ink);
-    margin-bottom: 16px;
-  }
-
-  /* meta */
-  .article-meta {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    margin-bottom: 24px;
-    padding-bottom: 20px;
-    border-bottom: 0.5px solid var(--border);
-    align-items: center;
-  }
-
-  .meta-tag {
-    background: var(--nav);
-    color: #b8dfc9;
-    padding: 2px 8px;
-    border-radius: 2px;
-    font-size: 10px;
-    letter-spacing: 0.3px;
-  }
-
-  /* Affiliate disclosure */
-  .disclosure {
-    background: var(--paper2);
-    border: 0.5px solid var(--border);
-    border-radius: 4px;
-    padding: 10px 14px;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    line-height: 1.5;
-    margin-bottom: 28px;
-  }
-  .disclosure::before {
-    content: "ℹ  Disclosure: ";
-    font-weight: 500;
-    color: var(--ink);
-  }
-
-  /* Intro pull quote */
-  .article-intro {
-    font-family: var(--serif);
-    font-size: 19px;
-    font-style: italic;
-    line-height: 1.7;
-    color: #3a3830;
-    border-left: 3px solid var(--accent);
-    padding-left: 20px;
-    margin-bottom: 32px;
-  }
-
-  /* Body text */
-  .article-body p {
-    font-size: 16px;
-    line-height: 1.85;
-    color: #2a2820;
-    margin-bottom: 18px;
-  }
-
-  /* H2 */
-  .article-body h2 {
-    font-family: var(--serif);
-    font-size: 26px;
-    font-weight: 400;
-    line-height: 1.2;
-    letter-spacing: -0.3px;
-    color: var(--ink);
-    margin: 44px 0 14px;
-    padding-bottom: 10px;
-    border-bottom: 0.5px solid var(--border);
-  }
-
-  /* product number badge on h2 */
-  .article-body h2 .num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 26px;
-    height: 26px;
-    background: var(--accent);
-    color: #fff;
-    border-radius: 50%;
-    font-family: var(--mono);
-    font-size: 12px;
-    font-style: normal;
-    margin-right: 10px;
-    vertical-align: middle;
-    flex-shrink: 0;
-  }
-
-  /* H3 */
-  .article-body h3 {
-    font-family: var(--sans);
-    font-size: 12px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--green);
-    margin: 28px 0 10px;
-  }
-
-  /* H4 */
-  .article-body h4 {
-    font-family: var(--sans);
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--ink);
-    margin: 20px 0 8px;
-  }
-
-  /* Lists */
-  .article-body ul,
-  .article-body ol {
-    margin: 12px 0 20px 20px;
-    padding: 0;
-  }
-
-  .article-body li {
-    font-size: 15px;
-    line-height: 1.75;
-    color: #2a2820;
-    margin-bottom: 7px;
-  }
-
-  .article-body ul li::marker { color: var(--accent); }
-  .article-body ol li::marker {
-    font-family: var(--mono);
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--accent);
-  }
-
-  /* ── Affiliate product box ── */
-  .aff-box {
-    background: #fff8f0;
-    border: 0.5px solid #f0d4b8;
-    border-left: 4px solid var(--accent);
-    border-radius: 0 8px 8px 0;
-    padding: 18px 22px;
-    margin: 28px 0;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 12px;
-    align-items: start;
-  }
-
-  .aff-box-content { min-width: 0; }
-
-  .aff-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 500;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    display: block;
-    margin-bottom: 5px;
-  }
-
-  .aff-name {
-    font-family: var(--serif);
-    font-size: 19px;
-    font-weight: 400;
-    color: var(--ink);
-    display: block;
-    margin-bottom: 5px;
-    line-height: 1.3;
-  }
-
-  .aff-desc {
-    font-size: 14px;
-    line-height: 1.65;
-    color: #3a3830;
-    margin: 0;
-  }
-
-  .aff-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.4px;
-    background: var(--accent);
-    color: #fff !important;
-    text-decoration: none;
-    padding: 10px 18px;
-    border-radius: 3px;
-    white-space: nowrap;
-    transition: background 0.15s;
-    margin-top: 4px;
-    align-self: center;
-  }
-
-  .aff-cta:hover { background: #a83615; }
-  .aff-cta svg { width: 12px; height: 12px; fill: #fff; flex-shrink: 0; }
-
-  /* ── Comparison table ── */
-  .comp-table-wrap { overflow-x: auto; margin: 24px 0; border-radius: 6px; border: 0.5px solid var(--border); }
-
-  .comp-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-    min-width: 480px;
-  }
-
-  .comp-table thead { background: var(--nav); }
-
-  .comp-table thead th {
-    font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 500;
-    color: #b8dfc9;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    padding: 12px 14px;
-    text-align: left;
-    border: none;
-  }
-
-  .comp-table tbody tr {
-    border-bottom: 0.5px solid var(--border);
-    transition: background 0.1s;
-  }
-
-  .comp-table tbody tr:last-child { border-bottom: none; }
-  .comp-table tbody tr:hover { background: var(--paper); }
-
-  .comp-table tbody td {
-    padding: 11px 14px;
-    color: #2a2820;
-    vertical-align: middle;
-  }
-
-  .comp-table tbody td:first-child {
-    font-weight: 500;
-    color: var(--ink);
-  }
-
-  .comp-table .check { color: var(--green); font-size: 15px; }
-  .comp-table .cross { color: #E24B4A; font-size: 15px; }
-  .comp-table .best-row { background: #f0f7f2; }
-
-  /* ── Star rating ── */
-  .stars { color: #EF9F27; font-size: 15px; letter-spacing: 1px; }
-  .rating-label { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-left: 4px; vertical-align: middle; }
-
-  /* ── Verdict / bottom line ── */
-  .verdict-box {
-    background: var(--paper);
-    border: 0.5px solid var(--border);
-    border-top: 3px solid var(--green);
-    border-radius: 0 0 8px 8px;
-    padding: 22px 26px;
-    margin: 36px 0;
-  }
-
-  .verdict-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 500;
-    color: var(--green);
-    text-transform: uppercase;
-    letter-spacing: 0.7px;
-    margin-bottom: 10px;
-    display: block;
-  }
-
-  .verdict-box p {
-    font-size: 15px;
-    line-height: 1.75;
-    color: #2a2820;
-    margin: 0;
-  }
-
-  /* ── FAQ ── */
-  .faq-section { margin: 36px 0; }
-
-  .faq-section h2 {
-    font-family: var(--serif);
-    font-size: 26px;
-    font-weight: 400;
-    margin-bottom: 20px;
-    color: var(--ink);
-    border-bottom: 0.5px solid var(--border);
-    padding-bottom: 10px;
-  }
-
-  .faq-item {
-    border-bottom: 0.5px solid var(--border);
-  }
-
-  .faq-q {
-    font-family: var(--sans);
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--ink);
-    padding: 14px 0;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    user-select: none;
-    list-style: none;
-  }
-
-  .faq-q::after {
-    content: '+';
-    font-family: var(--mono);
-    font-size: 18px;
-    color: var(--muted);
-    transition: transform 0.2s;
-    flex-shrink: 0;
-    margin-left: 12px;
-  }
-
-  .faq-item.open .faq-q::after { content: '−'; }
-
-  .faq-a {
-    font-size: 14px;
-    line-height: 1.75;
-    color: var(--muted);
-    padding: 0 0 16px;
-    display: none;
-  }
-
-  .faq-item.open .faq-a { display: block; }
-
-  /* ── Sidebar ── */
-  .article-sidebar {
-    position: sticky;
-    top: 72px;
-  }
-
-  .sidebar-widget {
-    margin-bottom: 24px;
-    padding-bottom: 24px;
-    border-bottom: 0.5px solid var(--border);
-  }
-
-  .sidebar-widget:last-child { border-bottom: none; }
-
-  .sidebar-widget-title {
-    font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--muted);
-    margin-bottom: 12px;
-  }
-
-  /* TOC widget */
-  .toc-list { list-style: none; }
-  .toc-list li { padding: 5px 0; border-bottom: 0.5px solid var(--border); }
-  .toc-list li:last-child { border-bottom: none; }
-  .toc-list a {
-    font-size: 13px;
-    color: var(--ink);
-    text-decoration: none;
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    line-height: 1.4;
-    transition: color 0.12s;
-  }
-  .toc-list a:hover { color: var(--accent); }
-  .toc-num {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  /* Tags widget */
-  .tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; }
-  .tag-item {
-    font-family: var(--mono);
-    font-size: 10px;
-    padding: 4px 10px;
-    border: 0.5px solid var(--border);
-    border-radius: 2px;
-    color: var(--muted);
-    text-decoration: none;
-    transition: all 0.12s;
-  }
-  .tag-item:hover { border-color: var(--accent); color: var(--accent); }
-
-  /* Newsletter widget */
-  .newsletter-widget {
-    background: var(--nav);
-    border-radius: 6px;
-    padding: 18px;
-    text-align: center;
-  }
-  .newsletter-widget strong {
-    display: block;
-    font-family: var(--sans);
-    font-size: 14px;
-    color: var(--green-lt);
-    margin-bottom: 6px;
-  }
-  .newsletter-widget p {
-    font-size: 12px;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 12px;
-    line-height: 1.5;
-  }
-  .newsletter-widget input[type="email"] {
-    width: 100%;
-    padding: 8px 12px;
-    font-size: 13px;
-    border: 0.5px solid rgba(255,255,255,0.2);
-    border-radius: 3px;
-    background: rgba(255,255,255,0.08);
-    color: #fff;
-    margin-bottom: 8px;
-    outline: none;
-    font-family: var(--sans);
-  }
-  .newsletter-widget input::placeholder { color: rgba(255,255,255,0.3); }
-  .newsletter-widget button {
-    width: 100%;
-    background: var(--green-lt);
-    color: var(--nav);
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.4px;
-    padding: 9px;
-    border-radius: 3px;
-    border: none;
-    cursor: pointer;
-  }
-
-  /* ── Footer ── */
-  .site-footer {
-    background: var(--nav);
-    padding: 18px 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 40px;
-  }
-
-  .footer-logo {
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 500;
-    color: #b8dfc9;
-  }
-  .footer-logo span { color: var(--green-lt); }
-
-  .footer-links {
-    display: flex;
-    gap: 18px;
-  }
-
-  .footer-links a {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: rgba(255,255,255,0.4);
-    text-decoration: none;
-    letter-spacing: 0.3px;
-    transition: color 0.12s;
-  }
-  .footer-links a:hover { color: #fff; }
-
-  .footer-disclaim {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: rgba(255,255,255,0.3);
-    width: 100%;
-    line-height: 1.5;
-  }
-
-  /* ── Responsive ── */
-  @media (max-width: 820px) {
-    .page-wrap {
-      grid-template-columns: 1fr;
-      gap: 32px;
-      padding-top: 24px;
-    }
-
-    .article-sidebar { position: static; }
-
-    h1.article-title { font-size: 28px; }
-
-    .article-intro { font-size: 16px; }
-
-    .article-body h2 { font-size: 22px; margin-top: 32px; }
-
-    .aff-box {
-      grid-template-columns: 1fr;
-    }
-
-    .site-footer {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 14px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .site-header { padding: 0 16px; }
-    .page-wrap { padding-left: 16px; padding-right: 16px; }
-    h1.article-title { font-size: 24px; }
-  }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0f0e0c;--paper:#f5f2eb;--paper2:#ede9df;--accent:#c8441a;--accent2:#2a5c3f;--muted:#7a7568;--border:#d4cfc4;--serif:Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--mono:'Courier New',monospace}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);min-height:100vh}
+
+/* Header */
+header{background:var(--ink);color:#fff;padding:0 32px}
+.hdr-inner{max-width:900px;margin:0 auto;padding:28px 0 24px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.logo{font-family:var(--serif);font-size:28px;font-weight:400;letter-spacing:-0.5px}
+.logo span{color:#e8856a;font-style:italic}
+.tagline{font-size:13px;color:#aaa;margin-top:4px;letter-spacing:.3px}
+.hdr-tag{font-family:var(--mono);font-size:11px;background:var(--accent2);color:#b8dfc9;padding:3px 10px;border-radius:2px;letter-spacing:.5px}
+
+/* Search */
+.search-bar{background:var(--paper2);border-bottom:1px solid var(--border);padding:14px 32px}
+.search-inner{max-width:900px;margin:0 auto;position:relative}
+.search-inner input{width:100%;padding:9px 16px 9px 40px;border:1px solid var(--border);border-radius:4px;font-family:var(--sans);font-size:14px;background:#fff;color:var(--ink);outline:none}
+.search-inner input:focus{border-color:var(--accent)}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:16px}
+
+/* Main */
+main{max-width:900px;margin:0 auto;padding:32px 32px 60px}
+
+/* Stats bar */
+.stats-bar{display:flex;gap:24px;margin-bottom:28px;flex-wrap:wrap}
+.stat{display:flex;flex-direction:column;gap:2px}
+.stat-val{font-family:var(--mono);font-size:22px;font-weight:600;color:var(--accent2)}
+.stat-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
+
+/* Category filters */
+.filters{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.filter-btn{font-family:var(--mono);font-size:11px;padding:5px 14px;border:1px solid var(--border);border-radius:2px;background:#fff;color:var(--muted);cursor:pointer;transition:all .12s;letter-spacing:.3px}
+.filter-btn:hover{border-color:var(--accent);color:var(--accent)}
+.filter-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* Article grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.card{background:#fff;border:1px solid var(--border);border-radius:6px;padding:18px 20px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:border-color .12s,transform .12s;text-decoration:none;color:inherit}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card-type{font-family:var(--mono);font-size:9px;letter-spacing:.6px;text-transform:uppercase;padding:2px 8px;border-radius:2px;display:inline-block;width:fit-content}
+.type-roundup{background:#eaf3de;color:#27500a}
+.type-review{background:#e6f1fb;color:#0c447c}
+.type-guide{background:#faeeda;color:#633806}
+.type-comparison{background:#eeedfe;color:#3c3489}
+.type-howto{background:#faece7;color:#712b13}
+.type-default{background:var(--paper2);color:var(--muted)}
+.card-title{font-family:var(--serif);font-size:16px;line-height:1.35;font-weight:400;color:var(--ink)}
+.card-meta{display:flex;gap:12px;align-items:center;margin-top:auto}
+.card-date{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.card-niche{font-size:11px;color:var(--muted);background:var(--paper2);padding:2px 8px;border-radius:2px}
+.card-arrow{margin-left:auto;color:var(--accent);font-size:14px}
+
+/* Loading & empty */
+.loading{text-align:center;padding:60px 20px;color:var(--muted)}
+.spinner{width:32px;height:32px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty-icon{font-family:var(--serif);font-size:48px;color:var(--border);margin-bottom:12px;font-style:italic}
+.empty p{font-size:14px;line-height:1.7;max-width:320px;margin:0 auto}
+
+/* Footer */
+footer{border-top:1px solid var(--border);padding:20px 32px;text-align:center;font-size:12px;color:var(--muted);font-family:var(--mono)}
+footer a{color:var(--accent);text-decoration:none}
+
+/* Pagination */
+.pagination{display:flex;justify-content:center;gap:8px;margin-top:32px;flex-wrap:wrap}
+.page-btn{font-family:var(--mono);font-size:11px;padding:6px 14px;border:1px solid var(--border);border-radius:2px;background:#fff;color:var(--muted);cursor:pointer;transition:all .12s}
+.page-btn:hover{border-color:var(--accent);color:var(--accent)}
+.page-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.page-btn:disabled{opacity:.4;cursor:not-allowed}
+
+@media(max-width:600px){
+  .hdr-inner{padding:20px 0 16px}
+  .logo{font-size:22px}
+  main,header,footer,.search-bar{padding-left:16px;padding-right:16px}
+  .grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 
-<!-- ═══ HEADER ═══ -->
-<header class="site-header">
-  <a href="#" class="site-logo">Reviewers<span>Best</span></a>
-  <span class="header-tag">reviewers04-20</span>
+<header>
+  <div class="hdr-inner">
+    <div>
+      <div class="logo">Reviewers<span>Best</span></div>
+      <div class="tagline">Honest reviews & buying guides powered by AI research</div>
+    </div>
+    <span class="hdr-tag">AMAZON AFFILIATE</span>
+  </div>
 </header>
 
-<!-- ═══ PAGE WRAP ═══ -->
-<div class="page-wrap">
-
-  <!-- ── MAIN ARTICLE ── -->
-  <main class="article-main">
-
-    <div class="breadcrumb">
-      <a href="#">Home</a>
-      <span class="sep">›</span>
-      <a href="#">Kitchen</a>
-      <span class="sep">›</span>
-      <span>Best Coffee Makers Under $100</span>
-    </div>
-
-    <span class="cat-pill">Kitchen · Best-of Roundup</span>
-
-    <h1 class="article-title">
-      10 Best Coffee Makers Under $100 — Tested and Ranked for 2025
-    </h1>
-
-    <div class="article-meta">
-      <span>Updated May 2025</span>
-      <span>8 min read</span>
-      <span>By ReviewersBest</span>
-      <span class="meta-tag">reviewers04-20</span>
-    </div>
-
-    <div class="disclosure">
-      As an Amazon Associate I earn from qualifying purchases. This costs you nothing extra and helps keep this site running.
-    </div>
-
-    <p class="article-intro">
-      After testing 24 machines over six weeks, these are the coffee makers that actually deliver great coffee without breaking the bank — ranked by brew quality, ease of use, and long-term reliability.
-    </p>
-
-    <div class="article-body">
-
-      <h2><span class="num">1</span> Best overall: Cuisinart DCC-3200</h2>
-
-      <p>The Cuisinart DCC-3200 consistently topped our tests for brew quality, speed, and ease of use. Its 14-cup carafe, programmable 24-hour timer, and adjustable keep-warm plate make it a complete package at around $70. The brew temperature hit a consistent 197°F — close to the SCAA-recommended 200°F.</p>
-
-      <p>We brewed over 60 pots through this machine during testing. It never faltered, never made bitter coffee, and was dead simple to clean.</p>
-
-      <div class="aff-box">
-        <div class="aff-box-content">
-          <span class="aff-label">★ Affiliate Pick</span>
-          <span class="aff-name">Cuisinart DCC-3200 14-Cup Coffee Maker</span>
-          <p class="aff-desc">Best overall brew quality in this price range — programmable, reliable, and easy to clean. Consistently hits near-ideal brew temperature.</p>
-          <div style="margin-top:8px">
-            <span class="stars">★★★★★</span>
-            <span class="rating-label">4.7 / 5 (12,400+ reviews)</span>
-          </div>
-        </div>
-        <a class="aff-cta" href="https://www.amazon.com/s?k=Cuisinart+DCC-3200&tag=reviewers04-20" target="_blank" rel="noopener sponsored">
-          View on Amazon
-          <svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M6.5 1H11v4.5M11 1L5 7M2 3H1v8h8V9" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-
-      <h2><span class="num">2</span> Best budget: Black+Decker CM0941</h2>
-
-      <p>At under $30, the Black+Decker CM0941 punches well above its weight. Compact, fast, and dead-simple to operate — ideal for small kitchens, offices, or anyone who just wants a reliable cup without fuss.</p>
-
-      <div class="aff-box">
-        <div class="aff-box-content">
-          <span class="aff-label">★ Affiliate Pick</span>
-          <span class="aff-name">Black+Decker CM0941 5-Cup Coffee Maker</span>
-          <p class="aff-desc">Under $30 and makes genuinely good coffee — the best value pick for small households or anyone on a tight budget.</p>
-          <div style="margin-top:8px">
-            <span class="stars">★★★★☆</span>
-            <span class="rating-label">4.4 / 5 (8,200+ reviews)</span>
-          </div>
-        </div>
-        <a class="aff-cta" href="https://www.amazon.com/s?k=Black+Decker+CM0941&tag=reviewers04-20" target="_blank" rel="noopener sponsored">
-          View on Amazon
-          <svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M6.5 1H11v4.5M11 1L5 7M2 3H1v8h8V9" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-
-      <!-- Comparison table -->
-      <h3>Quick Comparison</h3>
-      <div class="comp-table-wrap">
-        <table class="comp-table">
-          <thead>
-            <tr>
-              <th>Model</th>
-              <th>Price</th>
-              <th>Cups</th>
-              <th>Programmable</th>
-              <th>Rating</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="best-row">
-              <td>Cuisinart DCC-3200</td>
-              <td>~$70</td>
-              <td>14</td>
-              <td><span class="check">✓</span></td>
-              <td>4.7 ★</td>
-            </tr>
-            <tr>
-              <td>Black+Decker CM0941</td>
-              <td>~$28</td>
-              <td>5</td>
-              <td><span class="cross">✗</span></td>
-              <td>4.4 ★</td>
-            </tr>
-            <tr>
-              <td>Breville BDC450</td>
-              <td>~$99</td>
-              <td>12</td>
-              <td><span class="check">✓</span></td>
-              <td>4.6 ★</td>
-            </tr>
-            <tr>
-              <td>OXO Brew 9-Cup</td>
-              <td>~$89</td>
-              <td>9</td>
-              <td><span class="check">✓</span></td>
-              <td>4.5 ★</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Verdict box -->
-      <div class="verdict-box">
-        <span class="verdict-label">✦ Bottom Line</span>
-        <p>For most people, the <strong>Cuisinart DCC-3200</strong> is the clear winner — it brews excellent coffee, is built to last, and costs well under $100. If you're on a tight budget, the <strong>Black+Decker CM0941</strong> will surprise you at under $30. Either way, your Amazon order earns commission at no extra cost to you.</p>
-      </div>
-
-      <!-- FAQ -->
-      <div class="faq-section">
-        <h2>Frequently Asked Questions</h2>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFAQ(this)">What is the best coffee maker for under $100?</div>
-          <div class="faq-a">The Cuisinart DCC-3200 is our top pick under $100 — it brews at ideal temperature, holds 14 cups, and has a reliable programmable timer. It's available on Amazon for around $70.</div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFAQ(this)">How long do budget coffee makers last?</div>
-          <div class="faq-a">Most quality coffee makers in the $30–$100 range last 3–5 years with regular descaling. Cuisinart models tend to outlast the competition due to better build quality and widely available replacement carafes.</div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFAQ(this)">Does brew temperature really matter?</div>
-          <div class="faq-a">Yes — the SCAA recommends 195–205°F for optimal extraction. Cheap machines that brew at 175°F produce flat, under-extracted coffee. The Cuisinart DCC-3200 consistently hits 197°F in our tests.</div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFAQ(this)">Are these Amazon affiliate links?</div>
-          <div class="faq-a">Yes — every "View on Amazon" link uses our associate tag (reviewers04-20). You pay the same price, and we earn a small commission. We only recommend products we've actually tested.</div>
-        </div>
-      </div>
-
-    </div><!-- /article-body -->
-  </main>
-
-  <!-- ── SIDEBAR ── -->
-  <aside class="article-sidebar">
-
-    <div class="sidebar-widget">
-      <div class="sidebar-widget-title">In this article</div>
-      <ul class="toc-list">
-        <li><a href="#"><span class="toc-num">1</span> Best overall: Cuisinart DCC-3200</a></li>
-        <li><a href="#"><span class="toc-num">2</span> Best budget: Black+Decker</a></li>
-        <li><a href="#"><span class="toc-num">3</span> Best premium: Breville BDC450</a></li>
-        <li><a href="#"><span class="toc-num">4</span> Best build: OXO Brew 9-Cup</a></li>
-        <li><a href="#"><span class="toc-num">→</span> Quick comparison table</a></li>
-        <li><a href="#"><span class="toc-num">→</span> Bottom line</a></li>
-        <li><a href="#"><span class="toc-num">?</span> FAQ</a></li>
-      </ul>
-    </div>
-
-    <div class="sidebar-widget">
-      <div class="sidebar-widget-title">Browse categories</div>
-      <div class="tag-cloud">
-        <a class="tag-item" href="#">Kitchen</a>
-        <a class="tag-item" href="#">Tech</a>
-        <a class="tag-item" href="#">Fitness</a>
-        <a class="tag-item" href="#">Pets</a>
-        <a class="tag-item" href="#">Outdoors</a>
-        <a class="tag-item" href="#">Beauty</a>
-        <a class="tag-item" href="#">Home</a>
-        <a class="tag-item" href="#">Finance</a>
-      </div>
-    </div>
-
-    <div class="sidebar-widget">
-      <div class="newsletter-widget">
-        <strong>New picks weekly</strong>
-        <p>Best deals before they sell out — straight to your inbox</p>
-        <input type="email" placeholder="your@email.com" />
-        <button>Join the list →</button>
-      </div>
-    </div>
-
-  </aside>
-</div><!-- /page-wrap -->
-
-<!-- ═══ FOOTER ═══ -->
-<footer class="site-footer">
-  <div class="footer-logo">Reviewers<span>Best</span></div>
-  <div class="footer-links">
-    <a href="#">About</a>
-    <a href="#">Privacy</a>
-    <a href="#">Contact</a>
-    <a href="#">Disclaimer</a>
+<div class="search-bar">
+  <div class="search-inner">
+    <span class="search-icon">&#128269;</span>
+    <input type="text" id="searchInput" placeholder="Search articles…" oninput="filterArticles()" />
   </div>
-  <div class="footer-disclaim">
-    ReviewersBest is a participant in the Amazon Services LLC Associates Program (tag: reviewers04-20).
-    Affiliate links earn us a small commission at no extra cost to you.
+</div>
+
+<main>
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-val" id="totalCount">—</div><div class="stat-lbl">Articles</div></div>
+    <div class="stat"><div class="stat-val" id="nicheCount">—</div><div class="stat-lbl">Niches</div></div>
+    <div class="stat"><div class="stat-val" id="lastUpdated">—</div><div class="stat-lbl">Last updated</div></div>
   </div>
+
+  <div class="filters" id="filters">
+    <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+  </div>
+
+  <div id="articleGrid" class="grid">
+    <div class="loading">
+      <div class="spinner"></div>
+      <div>Loading articles…</div>
+    </div>
+  </div>
+
+  <div class="pagination" id="pagination"></div>
+</main>
+
+<footer>
+  <p>© 2026 ReviewersBest &nbsp;·&nbsp; <a href="https://github.com/ariyourluv/reviewersbest" target="_blank">GitHub</a> &nbsp;·&nbsp; As an Amazon Associate we earn from qualifying purchases.</p>
 </footer>
 
 <script>
-  function toggleFAQ(el) {
-    el.parentElement.classList.toggle('open');
+const OWNER = 'ariyourluv';
+const REPO = 'reviewersbest';
+const BRANCH = 'main';
+const PER_PAGE = 12;
+
+let allArticles = [];
+let filtered = [];
+let currentFilter = 'all';
+let currentPage = 1;
+
+async function fetchArticles() {
+  try {
+    const resp = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/articles?ref=${BRANCH}`, {
+      headers: { 'Accept': 'application/vnd.github.v3+json' }
+    });
+
+    if (!resp.ok) {
+      // Try master branch if main fails
+      const resp2 = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/articles?ref=master`, {
+        headers: { 'Accept': 'application/vnd.github.v3+json' }
+      });
+      if (!resp2.ok) throw new Error('Could not load articles folder');
+      return await resp2.json();
+    }
+    return await resp.json();
+  } catch(e) {
+    return [];
   }
+}
+
+function slugToTitle(filename) {
+  // Remove date prefix (YYYY-MM-DD-) and .html
+  return filename
+    .replace(/^\d{4}-\d{2}-\d{2}-/, '')
+    .replace(/\.html$/, '')
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, c => c.toUpperCase());
+}
+
+function getDateFromFilename(filename) {
+  const match = filename.match(/^(\d{4}-\d{2}-\d{2})/);
+  return match ? match[1] : '';
+}
+
+function guessType(title) {
+  const t = title.toLowerCase();
+  if (t.includes('best') || t.includes('top') || t.includes('roundup')) return { label: 'Roundup', cls: 'type-roundup' };
+  if (t.includes('vs') || t.includes('versus') || t.includes('comparison') || t.includes('compare')) return { label: 'Comparison', cls: 'type-comparison' };
+  if (t.includes('review')) return { label: 'Review', cls: 'type-review' };
+  if (t.includes('guide') || t.includes('buyer')) return { label: "Buyer's Guide", cls: 'type-guide' };
+  if (t.includes('how') || t.includes('tips') || t.includes('ways')) return { label: 'How-To', cls: 'type-howto' };
+  return { label: 'Article', cls: 'type-default' };
+}
+
+function guessNiche(title) {
+  const t = title.toLowerCase();
+  const niches = [
+    ['coffee','tea','brewing','espresso','kitchen'],
+    ['yoga','fitness','workout','gym','exercise','health'],
+    ['tech','laptop','phone','gadget','camera','computer'],
+    ['fishing','outdoor','camping','hiking','hunting'],
+    ['pet','dog','cat','animal'],
+    ['beauty','skincare','makeup','hair'],
+    ['baby','parenting','kids','toddler'],
+    ['finance','money','invest','budget','saving'],
+    ['home','garden','furniture','decor','appliance'],
+  ];
+  const labels = ['Kitchen','Fitness','Tech','Outdoor','Pets','Beauty','Parenting','Finance','Home'];
+  for (let i = 0; i < niches.length; i++) {
+    if (niches[i].some(w => t.includes(w))) return labels[i];
+  }
+  return 'General';
+}
+
+function renderCards(articles) {
+  const grid = document.getElementById('articleGrid');
+  if (!articles.length) {
+    grid.innerHTML = `<div class="empty" style="grid-column:1/-1"><div class="empty-icon">✦</div><p>No articles found. Generate some with the Autopilot tool!</p></div>`;
+    return;
+  }
+  const start = (currentPage - 1) * PER_PAGE;
+  const page = articles.slice(start, start + PER_PAGE);
+  grid.innerHTML = page.map(a => {
+    const type = guessType(a.title);
+    const url = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/articles/${a.filename}`;
+    const viewUrl = `article.html?file=${encodeURIComponent(a.filename)}`;
+    return `<a class="card" href="${viewUrl}">
+      <span class="card-type ${type.cls}">${type.label}</span>
+      <div class="card-title">${a.title}</div>
+      <div class="card-meta">
+        <span class="card-date">${a.date}</span>
+        <span class="card-niche">${a.niche}</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>`;
+  }).join('');
+}
+
+function renderPagination(total) {
+  const pages = Math.ceil(total / PER_PAGE);
+  const pg = document.getElementById('pagination');
+  if (pages <= 1) { pg.innerHTML = ''; return; }
+  let html = `<button class="page-btn" onclick="changePage(${currentPage-1})" ${currentPage===1?'disabled':''}>← Prev</button>`;
+  for (let i = 1; i <= pages; i++) {
+    html += `<button class="page-btn ${i===currentPage?'active':''}" onclick="changePage(${i})">${i}</button>`;
+  }
+  html += `<button class="page-btn" onclick="changePage(${currentPage+1})" ${currentPage===pages?'disabled':''}>Next →</button>`;
+  pg.innerHTML = html;
+}
+
+function changePage(p) {
+  const pages = Math.ceil(filtered.length / PER_PAGE);
+  if (p < 1 || p > pages) return;
+  currentPage = p;
+  renderCards(filtered);
+  renderPagination(filtered.length);
+  window.scrollTo(0, 0);
+}
+
+function setFilter(niche, btn) {
+  currentFilter = niche;
+  currentPage = 1;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function filterArticles() {
+  currentPage = 1;
+  applyFilters();
+}
+
+function applyFilters() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  filtered = allArticles.filter(a => {
+    const matchNiche = currentFilter === 'all' || a.niche === currentFilter;
+    const matchSearch = !q || a.title.toLowerCase().includes(q) || a.niche.toLowerCase().includes(q);
+    return matchNiche && matchSearch;
+  });
+  renderCards(filtered);
+  renderPagination(filtered.length);
+}
+
+function buildFilters(articles) {
+  const niches = [...new Set(articles.map(a => a.niche))].sort();
+  const container = document.getElementById('filters');
+  niches.forEach(niche => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.textContent = niche;
+    btn.onclick = () => setFilter(niche, btn);
+    container.appendChild(btn);
+  });
+}
+
+async function init() {
+  const files = await fetchArticles();
+
+  if (!files || !files.length) {
+    document.getElementById('articleGrid').innerHTML = `<div class="empty" style="grid-column:1/-1"><div class="empty-icon">✦</div><p>No articles yet. Use the Autopilot tool to generate and upload your first article!</p></div>`;
+    document.getElementById('totalCount').textContent = '0';
+    document.getElementById('nicheCount').textContent = '0';
+    document.getElementById('lastUpdated').textContent = '—';
+    return;
+  }
+
+  allArticles = files
+    .filter(f => f.name.endsWith('.html'))
+    .map(f => ({
+      filename: f.name,
+      title: slugToTitle(f.name),
+      date: getDateFromFilename(f.name),
+      niche: guessNiche(slugToTitle(f.name)),
+      url: f.download_url
+    }))
+    .sort((a, b) => b.date.localeCompare(a.date));
+
+  filtered = [...allArticles];
+
+  const niches = new Set(allArticles.map(a => a.niche));
+  document.getElementById('totalCount').textContent = allArticles.length;
+  document.getElementById('nicheCount').textContent = niches.size;
+  document.getElementById('lastUpdated').textContent = allArticles[0]?.date || '—';
+
+  buildFilters(allArticles);
+  renderCards(filtered);
+  renderPagination(filtered.length);
+}
+
+init();
 </script>
 </body>
 </html>

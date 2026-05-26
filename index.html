@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ReviewersBest — Top Product Reviews & Buying Guides</title>
+<meta name="description" content="Honest, in-depth product reviews and buying guides. Find the best products across home, fitness, tech, outdoor, and more.">
+<meta name="keywords" content="product reviews, buying guides, best products, amazon reviews">
+<link rel="canonical" href="https://ariyourluv.github.io/reviewersbest/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ReviewersBest — Top Product Reviews & Buying Guides">
+<meta property="og:description" content="Honest, in-depth product reviews and buying guides.">
+<meta property="og:url" content="https://ariyourluv.github.io/reviewersbest/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ReviewersBest">
+<meta name="twitter:description" content="Honest product reviews and buying guides.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"ReviewersBest","url":"https://ariyourluv.github.io/reviewersbest/","description":"Honest product reviews and buying guides"}</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--ink:#0f0e0c;--paper:#f5f2eb;--paper2:#ede9df;--accent:#c8441a;--accent2:#2a5c3f;--muted:#7a7568;--border:#d4cfc4;--serif:Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--mono:'Courier New',monospace}
@@ -121,6 +132,9 @@ footer a{color:var(--accent);text-decoration:none}
   </div>
 
   <div class="pagination" id="pagination"></div>
+  <div style="margin-top:24px;text-align:center">
+    <button onclick="downloadSitemap()" style="font-family:var(--mono);font-size:11px;padding:6px 16px;border:1px solid var(--border);border-radius:2px;background:#fff;color:var(--muted);cursor:pointer">Download sitemap.xml</button>
+  </div>
 </main>
 
 <footer>
@@ -281,6 +295,30 @@ function buildFilters(articles) {
     btn.onclick = () => setFilter(niche, btn);
     container.appendChild(btn);
   });
+}
+
+function downloadSitemap() {
+  const siteUrl = 'https://ariyourluv.github.io/reviewersbest';
+  const urls = allArticles.map(a => `  <url>
+    <loc>${siteUrl}/articles/${a.filename}</loc>
+    <lastmod>${a.date}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>`).join('
+');
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${siteUrl}/index.html</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+${urls}
+</urlset>`;
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([xml], {type: 'application/xml'}));
+  a.download = 'sitemap.xml';
+  a.click();
 }
 
 async function init() {
